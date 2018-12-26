@@ -10,7 +10,7 @@ namespace AracOOP
     {
         static void Main(string[] args)
         {
-            Otomobil otomobil1 = new Otomobil(aracTipi.Kara, "BMW", 1990, "Türkiye", 500);
+            Otomobil otomobil1 = new Otomobil(aracTipi.Kara, "BMW", 1990, "Türkiye", 500,yakitTuru.Benzin);
             otomobil1.calistir();
             otomobil1.DepoDoldur = 40;
             otomobil1.calistir();
@@ -20,6 +20,16 @@ namespace AracOOP
 
 
             Console.WriteLine(otomobil1.ToString());
+
+            Ucak ucak1 = new Ucak(500, ucakTurleri.Yolcu, 4, 500);
+            ucak1.AracTipi = aracTipi.Hava;
+            ucak1.BeygirGucu = 800;
+            ucak1.Mensei = "Türkiye";
+            ucak1.Model = "Boeing";
+            ucak1.YakitTuru = yakitTuru.Diger;
+            ucak1.Yil = 2005;
+
+            Console.WriteLine(ucak1);
             Console.ReadLine();
         }
     }
@@ -32,6 +42,7 @@ namespace AracOOP
         string kasaTipi;
         int depo;
         int hiz;
+
         public bool calistir()
         {
             if (depo > 0) calistiMi = true;
@@ -84,16 +95,17 @@ namespace AracOOP
         public override string ToString()
         {
             string str;
-            str = $"Arac Modeli : {Model} \n Arac yili :{Yil}\n Mensei :{Mensei}\n Arac Tipi :{AracTipi}\n Beygir Gucu :{BeygirGucu}";
+            str = base.ToString();
             return str;
         }
-        public Otomobil(aracTipi aracTipi, string model, int yil, string mensei, int beygirGucu)
+        public Otomobil(aracTipi aracTipi, string model, int yil, string mensei, int beygirGucu,yakitTuru yakitTuru)
         {
             AracTipi=aracTipi;
             Model = model;
             Yil = yil;
             Mensei = mensei;
             BeygirGucu = beygirGucu;
+            YakitTuru = yakitTuru;
         }
         public Otomobil()
         {
@@ -108,8 +120,20 @@ namespace AracOOP
         int yil;
         string mensei;
         int beygirGucu;
-        int yakitTuru;
+        yakitTuru yakitTuru;
+        public override string ToString()
+        {
 
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Arac Modeli : {Model}");
+            sb.AppendLine($"Arac Yili : {Yil}");
+            sb.AppendLine($"Arac Mensei : {Mensei}");
+            sb.AppendLine($"Arac tipi : {AracTipi}");
+            sb.AppendLine($"Beygir Gucu : {BeygirGucu}");
+            sb.AppendLine($"Yakit Turu : {YakitTuru}");
+            
+            return sb.ToString();
+        }
         public int Yil
         {
             get
@@ -140,7 +164,7 @@ namespace AracOOP
                 aracTipi = value;
             }
         }
-        public int YakitTuru
+        public yakitTuru YakitTuru
         {
             get
             {
@@ -195,6 +219,31 @@ namespace AracOOP
 
     }
 
+    class Ucak : Arac
+    {
+        int yolcuSayisi;
+        ucakTurleri ucakTuru;
+        int motorSayisi;
+        int hiz;
+        public Ucak(int yolcuSayisi,ucakTurleri ucakTuru,int motorSayisi,int hiz)
+        {
+            this.yolcuSayisi = yolcuSayisi;
+            this.ucakTuru = ucakTuru;
+            this.motorSayisi = motorSayisi;
+            this.hiz = hiz;
+
+        }
+        
+        public override string ToString()
+        {
+            string str;
+            str = base.ToString();
+            Console.WriteLine($"Yolcu Sayisi : {yolcuSayisi}\n Ucak Turu : {ucakTuru}\nMotor Sayisi : {motorSayisi}\n Hızı : {hiz}");
+            return str;
+        }
+
+    }
+
     enum aracTipi
     {
         Kara = 1, Deniz = 2, Hava = 3
@@ -203,5 +252,9 @@ namespace AracOOP
     enum yakitTuru
     {
         Benzin = 1, Mazot = 2, Elektrik = 3, Lpg = 4, Nukleer = 5, Ruzgar = 6, Diger = 7
+    }
+    enum ucakTurleri
+    {
+        Yolcu=1,Savas=2,Kargo=3,Tarim=4,Kesif=5
     }
 }
