@@ -10,7 +10,7 @@ namespace AracOOP
     {
         static void Main(string[] args)
         {
-            Otomobil otomobil1 = new Otomobil(1, "BMW", 1990, "Türkiye", 500);
+            Otomobil otomobil1 = new Otomobil(aracTipi.Kara, "BMW", 1990, "Türkiye", 500);
             otomobil1.calistir();
             otomobil1.DepoDoldur = 40;
             otomobil1.calistir();
@@ -87,9 +87,9 @@ namespace AracOOP
             str = $"Arac Modeli : {Model} \n Arac yili :{Yil}\n Mensei :{Mensei}\n Arac Tipi :{AracTipi}\n Beygir Gucu :{BeygirGucu}";
             return str;
         }
-        public Otomobil(int aracTipi, string model, int yil, string mensei, int beygirGucu)
+        public Otomobil(aracTipi aracTipi, string model, int yil, string mensei, int beygirGucu)
         {
-            AracTipi = aracTipi;
+            AracTipi=aracTipi;
             Model = model;
             Yil = yil;
             Mensei = mensei;
@@ -103,7 +103,7 @@ namespace AracOOP
 
     class Arac
     {
-        int aracTipi;
+        aracTipi aracTipi;
         string model;
         int yil;
         string mensei;
@@ -129,7 +129,7 @@ namespace AracOOP
                 }
             }
         }
-        public int AracTipi
+        public aracTipi AracTipi
         {
             get
             {
